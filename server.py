@@ -1,6 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request
+from forms import SignUpForm
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'rogive'
 
 @app.route('/')
 def home():
@@ -32,6 +34,14 @@ def templateblog():
             {'title': 'Piloto #2', 'author': 'Cristiano'}]
   content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
   return render_template('blog.html', author = "Ivan Rodriguez", sunny = True, pilots = pilots, content = content)
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+  form = SignUpForm()
+  if form.is_submitted():
+        result = request.form
+        return render_template('user.html', result=result)
+  return render_template('signup.html', form=form)
 
 if __name__ == '__main__':
   app.run()
