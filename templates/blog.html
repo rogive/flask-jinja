@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h2> BLOG DE DRONES </h2>
+<p style="text-align: justify">{{ content }}</p>
+<p> Un blog de drones entretenido hecho por {{ author }}</p>
+<p> El pronostico del dia es:</p>
+{% if sunny %}
+    <pre>   Dia Oscuro</pre>
+{% else %}
+    <pre>   Dia Oscuro</pre>
+{% endif %}
+<h2> PILOTOS </h2>
+{% for pilot in pilots %}
+    <h3> {{pilot.title}} </h3>
+    <h4> {{pilot.author}} </h4>
+{% endfor %}
+
+{% endblock %}
